@@ -96,8 +96,7 @@ public class MiscApiTest extends AbstractTmdbApiTest {
 
         Discover discover = new Discover();
         discover.year(2013).language(LANGUAGE_ENGLISH);
-
-        List<MovieDb> result = tmdb.getDiscover().getDiscover(discover).getResults();
+        List<MovieDb> result = tmdb.getMovieDiscover().getDiscover(discover).getResults();
         assertFalse("No movies discovered", result.isEmpty());
     }
 
@@ -109,7 +108,7 @@ public class MiscApiTest extends AbstractTmdbApiTest {
         Discover discover = new Discover();
         discover.withKeywords(Collections.singletonList(keyword), false).language(LANGUAGE_ENGLISH);
 
-        List<MovieDb> result = tmdb.getDiscover().getDiscover(discover).getResults();
+        List<MovieDb> result = tmdb.getMovieDiscover().getDiscover(discover).getResults();
         assertFalse("No movies discovered", result.isEmpty());
     }
 

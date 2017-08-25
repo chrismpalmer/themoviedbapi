@@ -5,6 +5,7 @@ import info.movito.themoviedbapi.model.JobDepartment;
 import info.movito.themoviedbapi.model.MovieDb;
 import info.movito.themoviedbapi.model.config.Timezone;
 import info.movito.themoviedbapi.model.config.TmdbConfiguration;
+import info.movito.themoviedbapi.model.tv.TvSeries;
 import info.movito.themoviedbapi.tools.*;
 import org.apache.commons.lang3.StringUtils;
 
@@ -184,8 +185,12 @@ public class TmdbApi {
     }
 
 
-    public TmdbDiscover getDiscover() {
-        return new TmdbDiscover(this);
+    public TmdbDiscover<MovieDb> getMovieDiscover() {
+        return new TmdbMovieDiscover(this);
+    }
+
+    public TmdbDiscover<TvSeries> getTvDiscover() {
+        return new TmdbTvDiscover(this);
     }
 
 

@@ -1,11 +1,11 @@
 package info.movito.themoviedbapi;
 
 import info.movito.themoviedbapi.model.Discover;
-import info.movito.themoviedbapi.model.core.MovieResultsPage;
+import info.movito.themoviedbapi.model.core.ResultsPage;
 import info.movito.themoviedbapi.tools.ApiUrl;
 
 
-public class TmdbDiscover extends AbstractTmdbApi {
+public abstract class TmdbDiscover<T> extends AbstractTmdbApi {
 
 
     public static final String TMDB_METHOD_DISCOVER = "discover";
@@ -45,7 +45,7 @@ public class TmdbDiscover extends AbstractTmdbApi {
      *                             a company). They can be comma separated to indicate an 'AND' query.
      * @return
      */
-    public MovieResultsPage getDiscover(int page, String language, String sortBy, boolean includeAdult, int year,
+    public ResultsPage<T> getDiscover(int page, String language, String sortBy, boolean includeAdult, int year,
                                         int primaryReleaseYear, int voteCountGte, float voteAverageGte, String withGenres, String releaseDateGte,
                                         String releaseDateLte, String certificationCountry, String certificationLte, String withCompanies) {
 
@@ -75,13 +75,16 @@ public class TmdbDiscover extends AbstractTmdbApi {
      * @param discover A discover object containing the search criteria required
      * @return
      */
-    public MovieResultsPage getDiscover(Discover discover) {
-        ApiUrl apiUrl = new ApiUrl(TMDB_METHOD_DISCOVER, "movie");
+    public ResultsPage<T> getDiscover(Discover discover) {
+        ApiUrl apiUrl = new ApiUrl(TMDB_METHOD_DISCOVER,getMethod());
 
         for (Object key : discover.getParams().keySet()) {
             apiUrl.addParam((String) key, discover.getParams().get(key));
         }
 
-        return mapJsonResult(apiUrl, MovieResultsPage.class);
+        return mapJsonResult(apiUrl, getType()) ;
     }
+
+    public abstract String getMethod();
+    protected abstract Class<? extends ResultsPage<T>> getType();
 }

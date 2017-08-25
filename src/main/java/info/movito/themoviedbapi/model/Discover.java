@@ -22,13 +22,13 @@ import java.util.Map;
  */
 public class Discover {
 
-    private final Map<String, String> params = new HashMap<String, String>();
+    protected final Map<String, String> params = new HashMap<String, String>();
     private static final String PARAM_PRIMARY_RELEASE_YEAR = "primary_release_year";
     private static final String PARAM_VOTE_COUNT_GTE = "vote_count.gte";
     private static final String PARAM_VOTE_AVERAGE_GTE = "vote_average.gte";
 
     private static final String PARAM_WITH_GENRES = "with_genres";
-    private static final String PARAM_WITH_KEYWORKDS = "with_keywords";
+    private static final String PARAM_WITH_KEYWORDS = "with_keywords";
 
     private static final String PARAM_RELEASE_DATE_GTE = "release_date.gte";
     private static final String PARAM_RELEASE_DATE_LTE = "release_date.lte";
@@ -198,7 +198,7 @@ public class Discover {
         String query = Joiner.on(orQuery ? "|" : ",").join(Iterables.transform(keywords, toID));
         assert StringUtils.isNotBlank(query);
 
-        params.put(PARAM_WITH_KEYWORKDS, query);
+        params.put(PARAM_WITH_KEYWORDS, query);
 
         return this;
     }
